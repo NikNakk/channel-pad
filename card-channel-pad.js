@@ -22,8 +22,8 @@ class ChannelPad extends LitElement {
       ${this.config.channels.map(channel => {
             return html`
               <div class="grid-item">
-                <input type="button" id='${channel.number}' class="input-btn ripple" .value="${channel.number}"  @click=${e => this._select_channel(e.target.value)}>
-                <label class="ripple" style="background-image: url('${channel.image}')" for='${channel.number}'></label>
+                <input type="button" id='${channel.mode}-${channel.number}' class="input-btn ripple" data-number="${channel.number}" data-mode="${channel.mode}" @click=${e => this._select_channel(e.target.dataset.mode, e.target.dataset.channel)}>
+                <label class="ripple" style="background-image: url('${channel.image}')" for='${channel.mode}-${channel.number}'></label>
               </div>
           `;
         })}
@@ -34,11 +34,10 @@ class ChannelPad extends LitElement {
     updated() {
     }
 
-    _select_channel(channel) {
-        this.hass.callService("media_player", "play_media", {
+    _select_channel(channelMode, channelNumber) {
+        this.hass.callService("webostv", "command", {
             entity_id: this.config.entity,
-            media_content_type: "channel",
-            media_content_id: channel,
+            payload: {channelMode: channelMode, channelNumber: channelNumber}
         });
     }
 
