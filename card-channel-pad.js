@@ -22,7 +22,7 @@ class ChannelPad extends LitElement {
       ${this.config.channels.map(channel => {
             return html`
               <div class="grid-item">
-                <input type="button" id='${channel.mode}-${channel.number}' class="input-btn ripple" data-number="${channel.number}" data-mode="${channel.mode}" @click=${e => this._select_channel(e.target.dataset.mode, e.target.dataset.channel)}>
+                <input type="button" id='${channel.mode}-${channel.number}' class="input-btn ripple" data-number="${channel.number}" data-mode="${channel.mode}" @click=${e => this._select_channel(e.target.dataset.mode, e.target.dataset.number)}>
                 <label class="ripple" style="background-image: url('${channel.image}')" for='${channel.mode}-${channel.number}'></label>
               </div>
           `;
