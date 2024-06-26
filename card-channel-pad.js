@@ -37,6 +37,7 @@ class ChannelPad extends LitElement {
     _select_channel(channelMode, channelNumber) {
         this.hass.callService("webostv", "command", {
             entity_id: this.config.entity,
+            command: "tv/openChannel",
             payload: {channelMode: channelMode, channelNumber: channelNumber}
         });
     }
